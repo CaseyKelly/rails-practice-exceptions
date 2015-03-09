@@ -14,9 +14,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate
-    redirect_to login_path, :alert => 'You must be logged in to visit that page.' unless current_user
+    render "/public/500.html", status: 500 unless current_user
   end
-  
+
   private
 
   def over_capacity
