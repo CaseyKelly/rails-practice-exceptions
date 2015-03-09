@@ -7,9 +7,19 @@ class ApplicationController < ActionController::Base
 
   rescue_from OverCapacity, with: :over_capacity
 
-   private
+  def current_user
+    User.find_by_id(session[:user_id])
+  end
 
-     def over_capacity
-       render "/public/404.html", status: 404
-     end
+  helper_method :current_user
+
+  def authenticate
+    redirect_to login_path, :alert => 'You must be logged in to visit that page.' unless current_user
+  end
+  
+  private
+
+  def over_capacity
+    render "/public/404.html", status: 404
+  end
 end
