@@ -10,6 +10,6 @@ class ApplicationController < ActionController::Base
    private
 
      def over_capacity
-       render plain: "We're over capacity", status: 404
+       render "/public/404.html", status: 404
      end
 end
